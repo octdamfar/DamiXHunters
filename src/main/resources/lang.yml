@@ -1,0 +1,80 @@
+prefix: "&c[Hunters]"
+no-permission: "%prefix% &cYou don't have permission."
+
+command-help:
+  - ""
+  - "&7-> &c/%label% addhunter <player>"
+  - "&7-> &c/%label% removehunter <player>"
+  - "&7-> &c/%label% addrunner <player>"
+  - "&7-> &c/%label% removerunner <player>"
+  - "&7-> &c/%label% setlives <speedrunner> <lives>"
+  - "&7-> &c/%label% start"
+  - "&7-> &c/%label% stop"
+
+unknown-player: "%prefix% &cUnknown player."
+actually-playing: "%prefix% &cYou can't change this while the games is started."
+
+addhunter-usage: "%prefix% &cThe usage of the command is: /%label% addhunter <player>"
+addhunter-is-runner: "%prefix% &c%player% is actually a runner. Remove him with /hunters removerunner %player%"
+addhunter-already-in: "%prefix% &c%player% is actually a hunter."
+addhunter-successfully: "%prefix% &7You add &c%player%&7 to &chunters&7 group."
+
+removehunter-usage: "%prefix% &cThe usage of the command is: /%label% removehunter <player>"
+removehunter-not-hunter: "%prefix% &c%player% is not a hunter."
+removehunter-successfully: "%prefix% &7You remove &c%player%&7 from &chunters&7 group."
+
+addrunner-usage: "%prefix% &cThe usage of the command is: /%label% addrunner <player>"
+addrunner-is-hunter: "%prefix% &c%player% is actually a hunter. Remove him with /hunters removehunter %player%"
+addrunner-already-in: "%prefix% &c%player% is actually a runner."
+addrunner-successfully: "%prefix% &7You add &b%player%&7 to &brunners&7 group."
+
+removerunner-usage: "%prefix% &cThe usage of the command is: /%label% removerunner <player>"
+removerunner-not-runner: "%prefix% &c%player% is not a runner."
+removerunner-successfully: "%prefix% &7You remove &b%player%&7 from &brunners&7 group."
+
+setlives-usage: "%prefix% &cThe usage of the command is: /%label% setlives <speedrunner> <lives>"
+setlives-invalid: "%prefix% &c%input% is not a invalid positive integer."
+setlives-not-runner: "%prefix% &c%player% is not a runner."
+setlives-successfully: "%prefix% &7You set &b%player%&7 lives to &a%lives%&7."
+
+start-already-started: "%prefix% &cThe game is already started!"
+start-no-hunters: "%prefix% &cThere are not hunter players defined."
+start-no-runners: "%prefix% &cThere are not runner players defined."
+start-invalid-seed: "%prefix% &cInvalid seed."
+
+stop-not-started: "%prefix% &cThe game is not started!"
+stop-successfully: "%prefix% &7You stop the speedrun game."
+stop-broadcast: "%prefix% &7The admin &a%player% &7has stopped the speedrun game."
+
+starting-phase1: "%prefix% &aCreating new worlds..."
+starting-phase2: "%prefix% &eThis is the new speedrun world!"
+starting-phase3: "%prefix% &bRunners&e will have %seconds% seconds of ventage before &chunters&e can move."
+
+starting-countdown: "%prefix% &cHunters &ewill be free to move in %seconds% seconds."
+game-started: "%prefix% &aThe game has started. Good Luck."
+
+start-hunters-title: "&c&lLET'S HUNT!"
+start-hunters-subtitle: "&7Use your compass to see where's the most close runner"
+start-hunters-title-times: "20 100 20"
+
+compass-no-runners-found: "&cNone runner was found."
+compass-tracking-runner: "&fTracking: &e%runner% &7| &fDistance: &b%distance%m &7 &fDirection: &a&l%direction%"
+compass-target-different-world: "&cThe targeted runner is in another dimension."
+compass-tracking-new-runner: "&7You start tracking &b%runner%&7."
+compass-target-offline: "&cThe actual targeted runner is offline."
+
+runner-death: "&cThe runner %runner% died. He has only %lives% lives left."
+
+game-hunters-win: "&aAll runners has 0 lives. Hunters win!"
+game-runners-win: "&aA runner just killed the dragon and cross the portal. Runners win!"
+
+hunters-win-title: "&c&lHUNTER WIN!"
+runners-win-title: "&b&lRUNNERS WIN!"
+
+win-subtitle: "&fCongratulations!"
+lose-subtitle: "&fLuck for the next try."
+
+hunters-win-title-times: "20 140 20"
+runners-win-title-times: "20 140 20"
+
+game-runners-duration: "&fThe speedrun duration was: &e%duration%"

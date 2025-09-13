@@ -1,0 +1,16 @@
+name: DamiXHunters
+version: '1.0'
+main: dev.damianfarias.hunters.DamiXHunters
+api-version: '1.21'
+depend:
+  - Multiverse-Core
+  - Multiverse-NetherPortals
+commands:
+  hunters:
+    description: Main DamiXHunters command
+    aliases:
+      - hunter
+      - damixhunters
+      - damixhunter
+      - runnersvshunter
+      - rvs

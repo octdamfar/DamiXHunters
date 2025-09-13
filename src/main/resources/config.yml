@@ -1,0 +1,51 @@
+worlds-difficulty: EASY
+
+# Amount of default runner lives on start speedrunning
+default-lives: 1
+
+# Only hunters can see hunters messages and vice versa with runners
+only-group-chat: true
+
+hunters-chat-format: "&c&l[Hunters Chat] &c%player%: &f%message%"
+runners-chat-format: "&b&l[Runners Chat] &b%player%: &f%message%"
+spectators-chat-format: "&7&l[Spectators Chat] &7%player%: &f%message%"
+
+# This format is used when only-group-chat is "false" or the game state is not PLAYING
+global-chat-format: "%group_prefix%%player%: &f%message%"
+
+hunter-prefix: "&c&l[Hunter] &c"
+runner-prefix: "&b&l[Runner] &b"
+spectator-prefix: "&7&l[Spectator] &7"
+null-prefix: "&7"
+
+# The radius of chunks on first speedruns worlds load. Default: 3
+preload-radius: 3
+
+starting-hunters-sound: UI_BUTTON_CLICK;1.0;0.75
+
+# In seconds, the duration of ventage to runners before hunters can move. Default 20
+hunters-countdown: 20
+
+time-format: "&fSpeedrun time: &e%H%h %M%m %S%s"
+
+runner-dead-sound: ENTITY_WITHER_HURT;1.0;1.0
+
+hunters-win-sound: ENTITY_ENDER_DRAGON_DEATH;1.0;0.9
+runners-win-sound: ENTITY_ENDER_DRAGON_DEATH;1.0;1.5
+
+compass-item:
+  type: COMPASS
+  name: "&cTrack closest runner"
+  amount: 1
+
+spectator-join-message: "&7%player% join the server to spectate."
+hunter-join-message: "&c%player% &fjust join the server again."
+
+runner-join-message: "&b%player% &fjust join the server again."
+spectator-quit-message: "&7%player% quit the server."
+hunter-quit-message: "&c%player% &fjust quit the server while playing."
+
+runner-quit-message: "&b%player% &fjust quit the server while playing."
+global-join-message: "&e%player% join to the server."
+
+global-quit-message: "&e%player% quit from the server."

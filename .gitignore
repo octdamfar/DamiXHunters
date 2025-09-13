@@ -1,0 +1,29 @@
+# Compiled output
+/out/
+/build/
+/target/*
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Local history files
+.history/
+
+# Log files
+*.log
+
+# Maven/Gradle specific files
+.gradle/
+/gradle/wrapper/gradle-wrapper.jar
+/gradle-wrapper.properties
+/buildSrc/build/
+/buildSrc/.gradle/
+
+# Other temporary files
+*.jar
+*.war
+*.zip
+*.tar.gz
