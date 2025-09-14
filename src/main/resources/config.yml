@@ -1,3 +1,31 @@
+# THe method to save players persistent stats
+# Available types: YAML, MYSQL
+stats-saving-method: YAML
+
+mysql:
+  host: localhost
+  port: 3306
+  database: "hunters"
+  user: "root"
+  password: ""
+  # Highly recommended to change this in the setup of the plugin, not when there's actually wrote data
+  table-name: "damixhunters_stats"
+  # Max of connections in the pool
+  maximum-pool-size: 10
+  # Min of inactive connections
+  minimum-idle: 5
+  # Waiting time to catch a connection
+  connection-timeout: 30000 # ms
+  # Waiting time to let a connection be inactive without close it
+  idle-timeout: 600000 # ms
+  # Max lifetime for a connection
+  max-life-time: 1800000 # ms
+  # Only change this if you now bout it
+  connection:
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+
 worlds-difficulty: EASY
 
 # Amount of default runner lives on start speedrunning

@@ -13,6 +13,7 @@ public class ConfigurationManager {
     private final YamlConfig langYaml;
     private final YamlConfig dataYaml;
     private final YamlConfig guiYaml;
+    private final YamlConfig statsYaml;
 
     private final MainConfig mainConfig;
     private final MessagesConfig langConfig;
@@ -22,6 +23,7 @@ public class ConfigurationManager {
         this.langYaml = new YamlConfig(plugin, "lang.yml");
         this.dataYaml = new YamlConfig(plugin, "data.yml");
         this.guiYaml = new YamlConfig(plugin, "gui.yml");
+        this.statsYaml = new YamlConfig(plugin, "stats.yml");
 
         mainYaml.register();
         langYaml.register();

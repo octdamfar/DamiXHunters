@@ -71,7 +71,7 @@ public class YamlConfig {
     // ---- Métodos utilitarios ----
 
     public String getString(String path) {
-        return config.getString(path, "Message not found");
+        return config.getString(path, "String not found");
     }
 
     public String getString(String path, String def) {

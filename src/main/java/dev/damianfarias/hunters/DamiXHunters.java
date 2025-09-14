@@ -7,6 +7,8 @@ import dev.damianfarias.hunters.managers.CompassManager;
 import dev.damianfarias.hunters.managers.ConfigurationManager;
 import dev.damianfarias.hunters.managers.GameManager;
 import dev.damianfarias.hunters.managers.PlayerStateManager;
+import dev.damianfarias.hunters.model.stats.StatsSavingMethod;
+import dev.damianfarias.hunters.model.stats.YamlSavingMethod;
 import dev.damianfarias.hunters.utils.ItemSerialization;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -33,12 +35,23 @@ public final class DamiXHunters extends JavaPlugin {
     private static MultiverseCoreApi mvAPI;
     @Getter
     private static MultiverseNetherPortals mvNP;
+    @Getter
+    private static StatsSavingMethod statsSavingMethod;
+
     @Override
     public void onEnable() {
         instance = this;
         mvAPI = MultiverseCoreApi.get();
         mvNP = (MultiverseNetherPortals) Bukkit.getPluginManager().getPlugin("Multiverse-NetherPortals");
         configurationManager = new ConfigurationManager(this);
+
+
+        if(configurationManager.getMainConfig().getString("stats-saving-method").equalsIgnoreCase("YAML")){
+            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml());
+        }else{
+            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml());
+        }
+
         gameManager = new GameManager();
         ItemStack compassItem = ItemSerialization.deserializeItemStack(configurationManager.getMainConfig().getSection("compass-item"));
         compassManager = new CompassManager(gameManager, compassItem);
