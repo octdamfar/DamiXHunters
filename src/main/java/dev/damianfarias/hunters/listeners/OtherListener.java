@@ -3,15 +3,15 @@ package dev.damianfarias.hunters.listeners;
 import dev.damianfarias.hunters.DamiXHunters;
 import dev.damianfarias.hunters.managers.GameManager;
 import dev.damianfarias.hunters.model.GameState;
+import dev.damianfarias.hunters.model.stats.UserStats;
 import dev.damianfarias.hunters.utils.DamiUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.World;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffect;
@@ -36,8 +36,39 @@ public class OtherListener implements Listener {
     }
 
     @EventHandler
+    public void onEntityAttack(EntityDamageByEntityEvent e){
+        if(e.getEntity() instanceof Player v && e.getDamager() instanceof Player k){
+            if((gm.isHunter(v.getUniqueId()) && gm.isHunter(k.getUniqueId())) || (gm.isRunner(v.getUniqueId()) && gm.isRunner(k.getUniqueId()))){
+                if(!DamiXHunters.getConfigurationManager().getMainConfig().getBoolean("friendly-fire")) e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        if (gm.isRunner(e.getPlayer().getUniqueId()) && gm.getState() == GameState.PLAYING) {
+        if(gm.getState() != GameState.PLAYING) return;
+        if(gm.isHunter(e.getPlayer().getUniqueId())){
+            if(e.getPlayer().getKiller() != null){
+                Player killer = e.getPlayer().getKiller();
+                if(gm.isRunner(killer.getUniqueId())) {
+                    UserStats stats = UserStats.get(killer);
+                    assert stats != null;
+                    stats.setRunnerKills(stats.getRunnerKills() + 1);
+                    DamiXHunters.getStatsSavingMethod().save(stats);
+                }
+            }
+        }
+        if (gm.isRunner(e.getPlayer().getUniqueId())) {
+            if(e.getPlayer().getKiller() != null){
+                Player killer = e.getPlayer().getKiller();
+                if(gm.isHunter(killer.getUniqueId())) {
+                    UserStats stats = UserStats.get(killer);
+                    assert stats != null;
+                    stats.setHunterKills(stats.getHunterKills() + 1);
+                    DamiXHunters.getStatsSavingMethod().save(stats);
+                }
+            }
+
             DamiXHunters.getPlayerStateManager().decrementLives(e.getPlayer());
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 DamiXHunters.getConfigurationManager().getLangConfig().send(onlinePlayer, "runner-death", Map.of("runner", e.getPlayer().getName(), "lives", String.valueOf(DamiXHunters.getPlayerStateManager().getLives(e.getPlayer()))));

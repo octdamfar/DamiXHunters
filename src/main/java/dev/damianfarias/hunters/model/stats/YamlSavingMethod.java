@@ -1,16 +1,20 @@
 package dev.damianfarias.hunters.model.stats;
 
 import dev.damianfarias.hunters.model.YamlConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.Plugin;
 
 import java.util.UUID;
 
 public class YamlSavingMethod implements StatsSavingMethod{
 
     private final YamlConfig fileConfig;
+    private final Plugin plugin;
 
-    public YamlSavingMethod(YamlConfig fileConfig) {
+    public YamlSavingMethod(YamlConfig fileConfig, Plugin plugin) {
         this.fileConfig = fileConfig;
+        this.plugin = plugin;
     }
 
     @Override
@@ -36,15 +40,17 @@ public class YamlSavingMethod implements StatsSavingMethod{
 
     @Override
     public void save(UserStats user) {
-        fileConfig.set(user.getId().toString()+".hunterWins", user.getHunterWins());
-        fileConfig.set(user.getId().toString()+".runnersWins", user.getRunnerWins());
-        fileConfig.set(user.getId().toString()+".hunterKills", user.getHunterKills());
-        fileConfig.set(user.getId().toString()+".runnerKills", user.getRunnerKills());
-        fileConfig.set(user.getId().toString()+".hunterPlayed", user.getHunterPlayed());
-        fileConfig.set(user.getId().toString()+".runnerPlayed", user.getRunnerPlayed());
-        fileConfig.set(user.getId().toString()+".steak", user.getSteak());
-        fileConfig.set(user.getId().toString()+".maxSteak", user.getMaxSteak());
-        fileConfig.save();
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            fileConfig.set(user.getId().toString() + ".hunterWins", user.getHunterWins());
+            fileConfig.set(user.getId().toString() + ".runnersWins", user.getRunnerWins());
+            fileConfig.set(user.getId().toString() + ".hunterKills", user.getHunterKills());
+            fileConfig.set(user.getId().toString() + ".runnerKills", user.getRunnerKills());
+            fileConfig.set(user.getId().toString() + ".hunterPlayed", user.getHunterPlayed());
+            fileConfig.set(user.getId().toString() + ".runnerPlayed", user.getRunnerPlayed());
+            fileConfig.set(user.getId().toString() + ".steak", user.getSteak());
+            fileConfig.set(user.getId().toString() + ".maxSteak", user.getMaxSteak());
+            fileConfig.save();
+        });
     }
 
     @Override

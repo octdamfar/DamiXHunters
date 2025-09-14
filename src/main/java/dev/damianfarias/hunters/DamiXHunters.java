@@ -47,9 +47,9 @@ public final class DamiXHunters extends JavaPlugin {
 
 
         if(configurationManager.getMainConfig().getString("stats-saving-method").equalsIgnoreCase("YAML")){
-            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml());
+            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml(), this);
         }else{
-            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml());
+            statsSavingMethod = new YamlSavingMethod(configurationManager.getStatsYaml(), this);
         }
 
         gameManager = new GameManager();

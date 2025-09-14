@@ -2,6 +2,7 @@ package dev.damianfarias.hunters.managers;
 
 import dev.damianfarias.hunters.DamiXHunters;
 import dev.damianfarias.hunters.model.GameState;
+import dev.damianfarias.hunters.model.stats.UserStats;
 import dev.damianfarias.hunters.utils.DamiUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -338,6 +339,19 @@ public class GameManager {
         DamiXHunters.getMvAPI().getSafetyTeleporter().to(spawnLocation.clone().add(0, 1.5, 0))
                 .checkSafety(true)
                 .teleport(getOnlineParticipants().stream().toList());
+        for (Player onlineParticipant : getOnlineRunners()) {
+            UserStats stats = UserStats.get(onlineParticipant);
+            assert stats != null;
+            stats.setRunnerPlayed(stats.getRunnerPlayed()+1);
+            DamiXHunters.getStatsSavingMethod().save(stats);
+        }
+
+        for (Player onlineParticipant : getOnlineHunters()) {
+            UserStats stats = UserStats.get(onlineParticipant);
+            assert stats != null;
+            stats.setHunterPlayed(stats.getHunterPlayed()+1);
+            DamiXHunters.getStatsSavingMethod().save(stats);
+        }
 
         for (Player player : getOnlineParticipants()) {
             managePlayer(player);
@@ -484,6 +498,13 @@ public class GameManager {
                 DamiUtils.sendSerializedSound(onlinePlayer, cm.getMainConfig().getString("hunters-win-sound"), "hunters-win-sound");
             }
 
+            for (Player onlineHunter : getOnlineHunters()) {
+                UserStats stats = UserStats.get(onlineHunter);
+                assert stats != null;
+                stats.setHunterWins(stats.getHunterWins()+1);
+                DamiXHunters.getStatsSavingMethod().save(stats);
+            }
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -502,7 +523,13 @@ public class GameManager {
             cm.getLangConfig().send(onlinePlayer, "game-runners-win");
             cm.getLangConfig().send(onlinePlayer, "game-runners-duration", Map.of("duration", formatTime(totalSeconds)));
             DamiUtils.sendSerializedSound(onlinePlayer, cm.getMainConfig().getString("runners-win-sound"), "runners-win-sound");
+        }
 
+        for (Player onlineRunner : getOnlineRunners()) {
+            UserStats stats = UserStats.get(onlineRunner);
+            assert stats != null;
+            stats.setRunnerWins(stats.getRunnerWins()+1);
+            DamiXHunters.getStatsSavingMethod().save(stats);
         }
 
         new BukkitRunnable() {
